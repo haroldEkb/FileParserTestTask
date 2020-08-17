@@ -1,5 +1,6 @@
 package com.haroldekb.FileTransferTestTask.controller;
 
+import com.haroldekb.FileTransferTestTask.entity.FileData;
 import com.haroldekb.FileTransferTestTask.service.FileParseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,14 +28,13 @@ public class FileUploadRestController {
         if (file.isEmpty()){
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body("Error: File is empty");
+                    .body("File is empty");
         }
         int fileId;
         fileId = service.saveFile(file);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body("Success: file " + file.getOriginalFilename() + " is saved. Id = " + fileId);
-
+                .body("Success: file " + file.getOriginalFilename() + " is saved.\nId = " + fileId);
     }
 
     @PutMapping("/files/{id}")
@@ -60,6 +60,16 @@ public class FileUploadRestController {
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/files/{id}")
+    public ResponseEntity<FileData> download(@PathVariable("id") Integer id){
+        FileData fileData = service.getFileData(id);
+        if (fileData.getContent() == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(fileData);
         }
     }
 }
