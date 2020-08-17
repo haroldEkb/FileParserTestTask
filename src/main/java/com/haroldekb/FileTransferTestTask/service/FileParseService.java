@@ -42,16 +42,17 @@ public class FileParseService {
     }
 
     public void updateFile(Integer id, MultipartFile multipartFile) {
-        UploadedFile toUpdate = repository.findById(id).get();
-        toUpdate.setName(multipartFile.getOriginalFilename());
         try {
+            UploadedFile toUpdate = repository.findById(id).get();
+            toUpdate.setName(multipartFile.getOriginalFilename());
             toUpdate.setContent(multipartFile.getBytes());
+            repository.save(toUpdate);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void deleteFile(Integer id) {
+    public void deleteFileById(Integer id) {
         repository.deleteById(id);
     }
 

@@ -29,6 +29,12 @@ public class UploadedFile {
         this.content = content;
     }
 
+    public UploadedFile(int id, String name, byte[] content) {
+        this.id = id;
+        this.name = name;
+        this.content = content;
+    }
+
     public Integer getId() {
         return id;
     }
