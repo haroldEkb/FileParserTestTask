@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "files")
-public class ParsedFile {
+public class UploadedFile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,10 +21,10 @@ public class ParsedFile {
     @Column(name = "content")
     private byte[] content;
 
-    public ParsedFile() {
+    public UploadedFile() {
     }
 
-    public ParsedFile(String name, byte[] content) {
+    public UploadedFile(String name, byte[] content) {
         this.name = name;
         this.content = content;
     }
