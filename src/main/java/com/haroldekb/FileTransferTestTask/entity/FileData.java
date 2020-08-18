@@ -1,5 +1,7 @@
 package com.haroldekb.FileTransferTestTask.entity;
 
+import com.haroldekb.FileTransferTestTask.structure.TreeFileStructure;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -9,7 +11,7 @@ import java.util.List;
 
 public class FileData {
 
-    /*
+    /**
     * Изначально написал класс, реализующий древовидную структуру,
     * где каждый узел хранит номер строки начала раздела,
     * уровень вложенности (глубину) раздела и список своих подразделов.
@@ -17,9 +19,9 @@ public class FileData {
     * В итоге остановился на LinkedHashMap<Integer, Integer>,
     * где ключ - номер строки начала раздела,
     * значение - глубина раздела
-    */
+    **/
 
-    private LinkedHashMap<Integer, Integer> structure;
+    private TreeFileStructure structure;
     private List<String> content;
 
     public FileData() {
@@ -33,11 +35,11 @@ public class FileData {
         this.content = content;
     }
 
-    public LinkedHashMap<Integer, Integer> getStructure() {
+    public TreeFileStructure getStructure() {
         return structure;
     }
 
-    public void setStructure(LinkedHashMap<Integer, Integer> structure) {
+    public void setStructure(TreeFileStructure structure) {
         this.structure = structure;
     }
 }

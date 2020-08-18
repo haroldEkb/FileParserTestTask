@@ -1,6 +1,7 @@
 package com.haroldekb.FileTransferTestTask.utils;
 
 import com.haroldekb.FileTransferTestTask.entity.FileData;
+import com.haroldekb.FileTransferTestTask.structure.TreeFileStructure;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -23,7 +24,7 @@ public class FileParser {
         FileData fileData = new FileData();
         List<String> list = fileContentToStrings(content);
         fileData.setContent(list);
-        LinkedHashMap<Integer, Integer> structure = getFileStructure(list);
+        TreeFileStructure structure = new TreeFileStructure(list);
         fileData.setStructure(structure);
         return fileData;
     }
@@ -39,25 +40,5 @@ public class FileParser {
             e.printStackTrace();
         }
         return new ArrayList<>(list);
-    }
-
-    private LinkedHashMap<Integer, Integer> getFileStructure(List<String> list) {
-        LinkedHashMap<Integer, Integer> structure = new LinkedHashMap<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).startsWith("#")){
-                structure.put(i, getDepth(list.get(i)));
-            }
-        }
-        return structure;
-    }
-
-    private Integer getDepth(String s) {
-        int i = 0;
-        char ch = s.charAt(i);
-        while (ch == '#') {
-            i++;
-            ch = s.charAt(i);
-        }
-        return i;
     }
 }

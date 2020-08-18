@@ -56,7 +56,7 @@ public class FileUploadRestController {
     @DeleteMapping("/files/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Integer id){
         if (service.existsById(id)) {
-            service.deleteFile(id);
+            service.deleteFileById(id);
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.notFound().build();
