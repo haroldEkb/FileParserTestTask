@@ -34,7 +34,7 @@ public class FileUploadRestController {
         fileId = service.saveFile(file);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body("Success: file " + file.getOriginalFilename() + " is saved.\nId = " + fileId);
+                .body("{\"id\":" + fileId + "}");
     }
 
     @PutMapping("/files/{id}")
@@ -65,11 +65,10 @@ public class FileUploadRestController {
 
     @GetMapping("/files/{id}")
     public ResponseEntity<FileData> download(@PathVariable("id") Integer id){
-        FileData fileData = service.getFileData(id);
-        if (fileData.getContent() == null) {
+        if (!service.existsById(id)) {
             return ResponseEntity.notFound().build();
-        } else {
-            return ResponseEntity.ok(fileData);
         }
+        FileData fileData = service.getFileData(id);
+        return ResponseEntity.ok(fileData);
     }
 }
