@@ -8,8 +8,7 @@ import java.util.List;
  **/
 
 public class FileData {
-
-    /*
+    /**
     * Изначально написал класс, реализующий древовидную структуру,
     * где каждый узел хранит номер строки начала раздела,
     * уровень вложенности (глубину) раздела и список своих подразделов.
@@ -17,7 +16,7 @@ public class FileData {
     * В итоге остановился на LinkedHashMap<Integer, Integer>,
     * где ключ - номер строки начала раздела,
     * значение - глубина раздела
-    */
+    **/
 
     private LinkedHashMap<Integer, Integer> structure;
     private List<String> content;

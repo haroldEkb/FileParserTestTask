@@ -3,13 +3,13 @@ package com.haroldekb.FileTransferTestTask.service;
 import com.haroldekb.FileTransferTestTask.entity.UploadedFile;
 import com.haroldekb.FileTransferTestTask.repository.FileRepository;
 import com.haroldekb.FileTransferTestTask.utils.FileParser;
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.util.Assert;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
@@ -76,7 +76,7 @@ public class FileParserServiceTest {
     @Test
     void getFileContent() {
         when(repository.findById(anyInt())).thenReturn(optional());
-        Assert.assertArrayEquals(service.getFileContentById(11), file().getContent());
+        Assert.isTrue(Arrays.equals(service.getFileContentById(11), file().getContent()), "Content is invalid");
     }
 
     @DisplayName("должен сработать метод getFileData")
